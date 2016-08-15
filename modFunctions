@@ -1,0 +1,27 @@
+Public Function RunStart()
+    Application.ScreenUpdating = False
+End Function
+Public Function RunEnd()
+    Application.ScreenUpdating = True
+    On Error GoTo 0
+End Function
+
+Function Contains(objCollection As Object, strName As String) As Boolean
+    'Checks if Object contains Name (eg. Worksheet, "Sheet1")
+    Dim o As Object
+    On Error Resume Next
+    Set o = objCollection(strName)
+    Contains = (Err.Number = 0)
+    Err.Clear
+ End Function
+
+Function SheetExists(sName As String) As Boolean
+    SheetExists = Evaluate("ISREF('" & sName & "'!A1)")
+End Function
+
+Sub RemoveVBAPasswords()
+    If Hook Then
+        MsgBox "VBA Project is unprotected!", vbInformation, "*****"
+    End If
+End Sub
+
